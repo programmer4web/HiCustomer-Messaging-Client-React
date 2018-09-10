@@ -2,7 +2,7 @@
   "name": "hi-customer-messagging-client-react",
   "version": "0.1.0",
   "description": "Fast and safe customer messaging plugin for your website implemented with React.",
-  "main": "lib/index.js",
+  "main": "src/index.jsx",
   "author": "Andrei Constantin Alexandru",
   "homepage": "https://github.com/programmer4web/hi-customer-messagging-client-react",
   "license": "MIT",
@@ -13,53 +13,73 @@
   "bugs": {
     "url": "https://github.com/programmer4web/hi-customer-messagging-client-react/issues"
   },
-  "files": [
-    "css",
-    "lib"
-  ],
-  "devDependencies": {
-    "@kadira/storybook": "^2.35.3",
-    "babel-cli": "^6.24.0",
-    "babel-core": "^6.18.2",
-    "babel-eslint": "^7.2.1",
-    "babel-jest": "^19.0.0",
-    "babel-preset-env": "^1.2.2",
-    "babel-preset-react": "^6.23.0",
-    "enzyme": "^2.8.0",
-    "eslint": "^3.18.0",
-    "eslint-config-react-app": "^0.6.2",
-    "eslint-plugin-flowtype": "^2.30.4",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.3",
-    "jest": "^19.0.2",
-    "np": "^2.13.1",
-    "react": "^15.4.2",
-    "react-addons-test-utils": "^15.4.2",
-    "react-dev-utils": "^0.5.2",
-    "react-dom": "^15.4.2",
-    "rimraf": "^2.6.1"
-  },
-  "peerDependencies": {
-    "react": "15.x"
-  },
   "scripts": {
-    "start": "npm run storybook",
-    "build": "rimraf lib && babel src --out-dir lib --ignore test.js --copy-files",
+    "dev": "./node_modules/.bin/webpack-dev-server --config webpack.config.dev.js",
+    "build": "yarn lint && ./node_modules/.bin/webpack --config webpack.config.dev.js",
+    "build:production": "./node_modules/.bin/webpack --config webpack.config.production.js",
+    "start": "./node_modules/.bin/webpack-dev-server --config webpack.config.production.js",
+    "lint": "eslint **/*.js --cache --ext .js,.jsx",
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "publish": "np"
+    "build-storybook": "build-storybook"
   },
   "jest": {
-    "moduleFileExtensions": [
-      "jsx",
-      "js",
-      "json"
+    "setupFiles": [
+      "./test/jestsetup.js"
     ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/(lib|docs|node_modules)/"
-    ]
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "moduleNameMapper": {
+      "^.+\\.(css|scss)$": "identity-obj-proxy"
+    }
+  },
+  "keywords": [
+    "react"
+  ],
+  "dependencies": {
+    "axios": "^0.18.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "@material-ui/core": "^3.0.3",
+    "typeface-roboto": "0.0.54"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.6",
+    "babel-jest": "^23.4.2",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-react-hmre": "^1.1.1",
+    "css-loader": "^1.0.0",
+    "enzyme": "^3.4.4",
+    "enzyme-adapter-react-16": "^1.2.0",
+    "enzyme-to-json": "^3.3.4",
+    "eslint": "^5.4.0",
+    "eslint-loader": "^2.1.0",
+    "eslint-plugin-react": "^7.11.1",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^23.5.0",
+    "nock": "^9.6.1",
+    "node-sass": "^4.7.2",
+    "prop-types": "^15.6.2",
+    "react-hot-loader": "^4.3.4",
+    "react-test-renderer": "^16.4.2",
+    "sass-loader": "^7.1.0",
+    "uglifyjs-webpack-plugin": "^1.3.0",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5",
+    "webpack-merge": "^4.1.1",
+    "@storybook/react": "^3.4.10",
+    "@storybook/addon-actions": "^3.4.10",
+    "@storybook/addon-links": "^3.4.10",
+    "@storybook/addons": "^3.4.10",
+    "babel-runtime": "^6.26.0"
   }
 }
